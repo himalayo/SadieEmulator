@@ -4,8 +4,8 @@ using Sadie.Db.Models.Catalog.Items;
 using Sadie.Db.Models.Catalog.Pages;
 using Sadie.Db.Models.Furniture;
 using Sadie.Db.Models.Players;
+using Sadie.Enums.Game.Catalog;
 using Sadie.Enums.Game.Furniture;
-using Sadie.Enums.Unsorted;
 using Sadie.Networking.Events.Dtos;
 using Sadie.Networking.Options;
 using Sadie.Networking.Packets;
@@ -169,7 +169,6 @@ public class NetworkPacketWriterSerializerTests
                     Id = 23324,
                     Title = "titles",
                     Image = "image992",
-                    TypeId = CatalogFrontPageItemType.PageName,
                     ProductName = "product92934",
                     CatalogPage = new CatalogPage
                     {

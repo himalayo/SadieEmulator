@@ -105,7 +105,7 @@ public class PlayerHelperService : IPlayerHelperService
             },
             FriendOnline = isOnline,
             FriendInRoom = inRoom,
-            Relation = PlayerRelationshipType.None
+            Relation = (int) PlayerRelationshipType.None
         };
         
         foreach (var friend in friendships)

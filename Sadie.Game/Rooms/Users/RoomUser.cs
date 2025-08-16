@@ -2,6 +2,7 @@ using System.Drawing;
 using Sadie.API;
 using Sadie.API.Game.Players;
 using Sadie.API.Game.Rooms;
+using Sadie.API.Game.Rooms.Chat.Commands;
 using Sadie.API.Game.Rooms.Mapping;
 using Sadie.API.Game.Rooms.Pathfinding;
 using Sadie.API.Game.Rooms.Services;
@@ -191,7 +192,7 @@ public class RoomUser(
         
         var writer = new RoomUserEffectWriter
         {
-            UserId = Player.Id,
+            UserId = (int) Player.Id,
             EffectId = (int) effect,
             DelayMs = 0
         };

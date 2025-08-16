@@ -1,10 +1,11 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Sadie.API.Game.Players;
+using Sadie.API.Networking.Client;
+using Sadie.API.Networking.Events.Handlers;
 using Sadie.Db;
 using Sadie.Db.Models.Players;
 using Sadie.Enums.Game.Players;
-using Sadie.Networking.Client;
 using Sadie.Networking.Events.Dtos;
 using Sadie.Networking.Writers.Players.Friendships;
 using Sadie.Shared.Attributes;

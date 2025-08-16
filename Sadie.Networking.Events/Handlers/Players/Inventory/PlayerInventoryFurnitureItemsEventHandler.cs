@@ -1,4 +1,5 @@
-using Sadie.Networking.Client;
+using Sadie.API.Networking.Client;
+using Sadie.API.Networking.Events.Handlers;
 using Sadie.Networking.Writers.Players.Inventory;
 using Sadie.Shared.Attributes;
 using Sadie.Shared.Extensions;

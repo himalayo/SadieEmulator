@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Sadie.API;
 using Sadie.Shared;
 using SadieEmulator;
 using Serilog;
-using Serilog.Events;
 
 namespace Sadie.Console;
 
@@ -47,7 +45,7 @@ internal static class Program
 
         System.Console.ForegroundColor = ConsoleColor.White;
 
-        System.Console.WriteLine($"         You are running version {GlobalState.Version}");
+        System.Console.WriteLine($"         You're running version {GlobalState.Version}");
         System.Console.WriteLine("");
     }
     
@@ -67,6 +65,7 @@ internal static class Program
         }
 
         await _server.DisposeAsync();
+        _server = null;
     }
 
     private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
