@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Sadie.API;
 using Sadie.Shared;
 using SadieEmulator;
 using Serilog;
-using Serilog.Events;
 
 namespace Sadie.Console;
 

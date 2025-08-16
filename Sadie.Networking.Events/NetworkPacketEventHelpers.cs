@@ -4,6 +4,7 @@ using Sadie.API.Game.Rooms;
 using Sadie.API.Game.Rooms.Chat.Commands;
 using Sadie.API.Game.Rooms.Services;
 using Sadie.API.Game.Rooms.Users;
+using Sadie.API.Networking.Client;
 using Sadie.Db.Models.Constants;
 using Sadie.Db.Models.Players;
 using Sadie.Enums.Game.Furniture;
@@ -11,7 +12,6 @@ using Sadie.Enums.Game.Players;
 using Sadie.Enums.Game.Rooms;
 using Sadie.Enums.Game.Rooms.Furniture;
 using Sadie.Enums.Miscellaneous;
-using Sadie.Networking.Client;
 using Sadie.Networking.Writers.Generic;
 using Sadie.Networking.Writers.Handshake;
 using Sadie.Networking.Writers.Moderation;
@@ -219,7 +219,7 @@ public static class NetworkPacketEventHelpers
             {
                 await roomUser2.Room.UserRepository.BroadcastDataAsync(new RoomUserEffectWriter
                 {
-                    UserId = roomUser2.Player.Id,
+                    UserId = (int) roomUser2.Player.Id,
                     EffectId = new Random().Next(1, 100),
                     DelayMs = 0
                 });
