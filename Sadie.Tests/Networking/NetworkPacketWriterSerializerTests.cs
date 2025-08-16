@@ -169,7 +169,6 @@ public class NetworkPacketWriterSerializerTests
                     Id = 23324,
                     Title = "titles",
                     Image = "image992",
-                    TypeId = CatalogFrontPageItemType.PageName,
                     ProductName = "product92934",
                     CatalogPage = new CatalogPage
                     {
