@@ -1,5 +1,6 @@
-﻿using Sadie.Enums.Game.Rooms;
-using Sadie.Networking.Client;
+﻿using Sadie.API.Networking.Client;
+using Sadie.API.Networking.Events.Handlers;
+using Sadie.Enums.Game.Rooms;
 using Sadie.Networking.Writers.Navigator;
 using Sadie.Shared.Attributes;
 
