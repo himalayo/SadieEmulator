@@ -5,8 +5,8 @@ using Sadie.API.Networking.Events.Handlers;
 using Sadie.Db;
 using Sadie.Db.Models.Players.Furniture;
 using Sadie.Networking.Events.Attributes;
-using Sadie.Shared.Attributes;
 using Sadie.Networking.Writers.Rooms.Furniture;
+using Sadie.Shared.Attributes;
 
 namespace Sadie.Networking.Events.Handlers.Rooms.Furniture.Wired;
 

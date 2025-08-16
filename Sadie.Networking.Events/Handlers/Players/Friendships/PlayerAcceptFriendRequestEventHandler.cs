@@ -1,10 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Sadie.API.Game.Players;
 using Sadie.API.Game.Rooms;
-using Sadie.API.Networking.Client;
-using Sadie.API.Networking.Events.Handlers;
 using Sadie.Db;
 using Sadie.Enums.Game.Players;
+using Sadie.Networking.Client;
 using Sadie.Networking.Events.Dtos;
 using Sadie.Shared.Attributes;
 
@@ -70,7 +69,7 @@ public class PlayerAcceptFriendRequestEventHandler(
                 },
                 FriendOnline = targetOnline,
                 FriendInRoom = targetInRoom,
-                Relation = (PlayerRelationshipType)(targetRelationship?.TypeId ?? 0)
+                Relation = (PlayerRelationshipType?)targetRelationship?.TypeId ?? PlayerRelationshipType.None
             }
         ]);
 
@@ -103,9 +102,7 @@ public class PlayerAcceptFriendRequestEventHandler(
                     },
                     FriendOnline = true,
                     FriendInRoom = player.State.CurrentRoomId != 0,
-                    Relation = relationship?.TypeId != null
-                        ? (PlayerRelationshipType)relationship.TypeId
-                        : PlayerRelationshipType.None
+                    Relation = (PlayerRelationshipType?)relationship?.TypeId ?? PlayerRelationshipType.None
                 }
             ]);
         }

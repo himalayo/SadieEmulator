@@ -447,7 +447,7 @@ public class RoomTileMapHelperServiceTests
     {
         Assert.That(_tileMapHelperService.GetPointInFront(1, 2, HDirection.North), Is.EqualTo(new Point(1, 1)));
     }
-    
+        
     [Test]
     public void GetPointInFront_East_ReturnsCorrect()
     {

@@ -5,12 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Sadie.API;
-using Sadie.API.Networking.Client;
-using Sadie.API.Plugins;
 using Sadie.Db;
+using Sadie.Game.Players.Options;
 using Sadie.Networking;
-using Sadie.Options.Options;
-using SadieEmulator.Plugins;
+using Sadie.Networking.Client;
 using SadieEmulator.Tasks;
 using Serilog;
 
@@ -20,13 +18,12 @@ public class Server(ILogger<Server> logger,
     IServerTaskWorker taskWorker,
     INetworkListener networkListener,
     IDbContextFactory<SadieDbContext> dbContextFactory,
-    IDbContextFactory<SadieDbContext> dbContextFactoryMigrate,
+    IDbContextFactory<SadieMigrationsDbContext> dbContextFactoryMigrate,
     IOptions<PlayerOptions> playerOptions,
     INetworkClientRepository networkClientRepository,
     IConfiguration config) : IServer
 {
     private readonly CancellationTokenSource _tokenSource = new();
-    private bool _disposed = false;
     
     public async Task RunAsync()
     {
@@ -34,11 +31,8 @@ public class Server(ILogger<Server> logger,
         
         Log.Logger.Information("Booting up...");
         
-        await WarnIfOutdatedAsync();
         await MigrateIfNeededAsync();
         await CleanUpDataAsync();
-        
-        await PluginService.BootstrapPluginsAsync();
 
         if (playerOptions.Value.CanReuseSsoTokens)
         {
@@ -52,17 +46,6 @@ public class Server(ILogger<Server> logger,
         logger.LogInformation($"Server booted up in {Math.Round(stopwatch.Elapsed.TotalMilliseconds)}ms");
         
         await StartListeningForConnectionsAsync();
-    }
-
-    private async Task WarnIfOutdatedAsync()
-    {
-        var latest = await LatestVersionProvider.GetLatestVersionAsync();
-        var current = Assembly.GetExecutingAssembly().GetName().Version;
-        
-        if (latest != null && latest > current)
-        {
-            Log.Logger.Warning($"Version ({current}) is outdated, {latest} available.");
-        }
     }
 
     private async Task MigrateIfNeededAsync()
@@ -106,13 +89,6 @@ public class Server(ILogger<Server> logger,
 
     public async ValueTask DisposeAsync()
     {
-        if (_disposed)
-        {
-            return;
-        }
-        
-        _disposed = true;
-        
         await _tokenSource.CancelAsync();
         
         logger.LogWarning("Server is about to shut down...");

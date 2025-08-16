@@ -37,8 +37,7 @@ public class PlayerFriendsListWriter : AbstractPacketWriter
             
             var relationshipType = Relationships
                .FirstOrDefault(x => x.TargetPlayerId == friendData.Id)
-               ?.TypeId ??
-           (int) PlayerRelationshipType.None;
+               ?.TypeId ?? (int) PlayerRelationshipType.None;
 
             writer.WriteLong(friendData.Id);
             writer.WriteString(friendData.Username);

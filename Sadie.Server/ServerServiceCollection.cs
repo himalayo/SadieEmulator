@@ -19,15 +19,16 @@ public static class ServerServiceCollection
 {
     public static void AddServices(IServiceCollection serviceCollection, IConfiguration config)
     {
-        serviceCollection.AddOptions()
-            .AddSingleton<IServer, Server>()
-            .AddSingleton<IServerTaskWorker, ServerTaskWorker>()
-            .AddSingleton<ServerTaskWorker>();
+        serviceCollection.AddOptions();
+        serviceCollection.AddSingleton<IServer, Server>();
+        serviceCollection.AddSingleton<IServerTaskWorker, ServerTaskWorker>();
+        serviceCollection.AddSingleton<ServerTaskWorker>();
 
         DatabaseServiceCollection.AddServices(serviceCollection, config);
 
-        serviceCollection.AddSingleton<ServerSettings>(p => new ServerSettings())
-            .AddSingleton<List<ServerPeriodicCurrencyReward>>(p => []);
+        serviceCollection.AddSingleton<ServerSettings>(p => new ServerSettings());
+        
+        serviceCollection.AddSingleton<List<ServerPeriodicCurrencyReward>>(p => []);
 
         MapperServiceCollection.AddServices(serviceCollection);
         PlayerServiceCollection.AddServices(serviceCollection, config);
@@ -36,16 +37,18 @@ public static class ServerServiceCollection
         NetworkPacketServiceCollection.AddServices(serviceCollection);
         NavigatorServiceCollection.AddServices(serviceCollection);
         EncryptionServiceProvider.AddServices(serviceCollection, config);
+        
         LocaleServiceCollection.AddServices(serviceCollection);
         
+        serviceCollection.AddDbContextFactory<SadieMigrationsDbContext>();
+
         ServiceCollectionHelpers.LoadPlugins(config);
         
         var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-        
-        serviceCollection.RegisterPluginServices(assemblies)
-            .RegisterRoomChatCommands(assemblies)
-            .RegisterFurnitureInteractors(assemblies)
-            .RegisterRoomFurnitureProcessors(assemblies);
+
+        serviceCollection.RegisterRoomChatCommands(assemblies);
+        serviceCollection.RegisterFurnitureInteractors(assemblies);
+        serviceCollection.RegisterRoomFurnitureProcessors(assemblies);
         
         serviceCollection.Scan(scan => scan
             .FromAssemblies(assemblies)

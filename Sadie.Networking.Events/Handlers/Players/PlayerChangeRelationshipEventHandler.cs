@@ -1,14 +1,13 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Sadie.API.Game.Players;
-using Sadie.API.Networking.Client;
-using Sadie.API.Networking.Events.Handlers;
 using Sadie.Db;
 using Sadie.Db.Models.Players;
 using Sadie.Enums.Game.Players;
+using Sadie.Networking.Client;
 using Sadie.Networking.Events.Dtos;
-using Sadie.Shared.Attributes;
 using Sadie.Networking.Writers.Players.Friendships;
+using Sadie.Shared.Attributes;
 using PlayerRelationshipType = Sadie.Enums.Game.Players.PlayerRelationshipType;
 
 namespace Sadie.Networking.Events.Handlers.Players;
@@ -103,7 +102,7 @@ public class PlayerChangeRelationshipEventHandler(
                     Friend = newFriendData,
                     FriendOnline = isOnline,
                     FriendInRoom = inRoom,
-                    Relation = (PlayerRelationshipType) relationId
+                    Relation = (PlayerRelationshipType)relationId
                 }
             ]
         };
