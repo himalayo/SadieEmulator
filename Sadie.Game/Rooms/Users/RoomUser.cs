@@ -192,7 +192,7 @@ public class RoomUser(
         
         var writer = new RoomUserEffectWriter
         {
-            UserId = Player.Id,
+            UserId = (int) Player.Id,
             EffectId = (int) effect,
             DelayMs = 0
         };

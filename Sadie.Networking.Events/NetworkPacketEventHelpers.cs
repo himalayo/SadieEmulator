@@ -219,7 +219,7 @@ public static class NetworkPacketEventHelpers
             {
                 await roomUser2.Room.UserRepository.BroadcastDataAsync(new RoomUserEffectWriter
                 {
-                    UserId = roomUser2.Player.Id,
+                    UserId = (int) roomUser2.Player.Id,
                     EffectId = new Random().Next(1, 100),
                     DelayMs = 0
                 });
